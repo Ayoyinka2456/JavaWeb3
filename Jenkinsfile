@@ -32,7 +32,7 @@ pipeline {
                     if sudo docker ps -a --format '{{.Names}}' | grep -Eq '^jWeb1$'; then
                         sudo docker rm -f jWeb1
                     fi
-                    sudo docker run -d -p 8080:8080 --name jWeb1 ayoyinka/javaweb-app
+                    sudo docker run -d -p 50:8080 --name jWeb1 ayoyinka/javaweb-app
                 '''
             }
         }
@@ -55,7 +55,7 @@ pipeline {
             emailext(
                 subject: '${PROJECT_NAME} - Build #${BUILD_NUMBER} - ${BUILD_STATUS}',
                 body: 'Check console output at ${BUILD_URL} to view the results.',
-                to: 'yimikacrations@gmail.com'
+                to: 'eas.adeyemi@gmail.com'
             )
         }
     }
