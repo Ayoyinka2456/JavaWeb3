@@ -22,7 +22,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'sudo docker build -t javaweb-app .'
+                sh 'sudo docker build -t ayoyinka/javaweb-app .'
             }
         }
 
@@ -32,7 +32,7 @@ pipeline {
                     if sudo docker ps -a --format '{{.Names}}' | grep -Eq '^jWeb1$'; then
                         sudo docker rm -f jWeb1
                     fi
-                    sudo docker run -d -p 8080:8080 --name jWeb1 javaweb-app
+                    sudo docker run -d -p 8080:8080 --name jWeb1 ayoyinka/javaweb-app
                 '''
             }
         }
