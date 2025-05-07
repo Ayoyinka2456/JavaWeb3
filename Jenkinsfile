@@ -36,6 +36,18 @@ pipeline {
                 '''
             }
         }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker_credential', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | sudo docker login -u "$DOCKER_USER" --password-stdin
+                        sudo docker push ayoyinka/javaweb-app
+                        sudo docker logout
+                    '''
+                }
+            }
+        }
     }
 
     post {
